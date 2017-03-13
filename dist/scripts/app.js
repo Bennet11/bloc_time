@@ -9,11 +9,12 @@
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: '/templates/main.html'
+        controller: 'mainCtrl as main',
+        templateUrl: 'templates/main.html'
       });
   }
 
   angular
-    .module('blocTime', []);
+    .module('blocTime', ['firebase', 'ui.router'])
     .config(config);
 })();

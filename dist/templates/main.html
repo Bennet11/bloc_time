@@ -1,0 +1,11 @@
+<div class="col-md-9 text-center">
+  <div class="time-field timer-digits">
+    {{ main.time | timecode }}
+  </div>
+  <span type="button" class="btn btn-primary" ng-show="!main.onBreak" ng-click="main.startResetTimer()">
+    {{ main.buttonName }}
+  </span>
+  <span type="button" class="btn btn-primary" ng-show="main.onBreak" ng-click="main.starResetTimer()">
+    {{ main.buttonName }} 
+  </span>
+</div>
