@@ -5,10 +5,10 @@
     const BREAK_TIME = 5;
     const LONG_BREAK_TIME = 7;
 
-
     var timer;
     var completedSessions = 0;
     var self = this;
+
     this.onBreak = false;
     this.time = WORK_TIME;
     this.buttonName = "Start";
@@ -18,7 +18,7 @@
         $interval.cancel(timer);
         timer = $interval(countdown, 1000);
       } else {
-        setTimer();
+          setTimer();
       }
     };
 
@@ -45,14 +45,11 @@
           self.time = LONG_BREAK_TIME;
         } else {
           self.time = BREAK_TIME;
-        }
+        };
       } else {
         self.time = WORK_TIME;
       }
     };
-
-
-
   }
 
   angular
