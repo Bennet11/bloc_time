@@ -1,7 +1,7 @@
 .body {
   font-family: 'Open Sans';
   color: grey;
-  min-height: 100%;
+
 }
 
 .time {
@@ -10,5 +10,15 @@
 }
 
 .btn {
-  
+
+}
+
+.jumbotron {
+  position: relative;
+  background-color: grey;
+  border: solid;
+  border-color: black;
+  padding: inherit;
+  height: 800px;
+  width: 200px;
 }

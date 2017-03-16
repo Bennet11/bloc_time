@@ -1,13 +1,36 @@
-<div class="col-md-12 text-center">
-  <div class="time">
-    {{ main.time | timecode }}
+<div class="col-md-12 jumbotron">
+  <section class="sidebar">
+    <div class="sidebar-header">
+      <h1 id="title">Add a Task</h1>
+
+      <div class="tasks">
+        <form ng-submit="main.addTask()">
+          <input type="text" class="form-control" id="taskInput" placeholder="Write a task">
+          <br />
+          <div type="submit" class="btn btn-success" ng-click="main.addTask()">Submit</div>
+        </form>
+
+        <h3>Task List</h3>
+          <ul>
+            <div id="tasks" ng-repeat="task in main.tasks">
+              </li>{{ task.name }}</li>
+            </div>
+          </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="col-md-12 text-center">
+    <div class="time">
+      {{ main.time | timecode }}
+    </div>
+    <span type="button" class="btn btn-info btn-lg" ng-show="!main.onBreak" ng-click="main.startResetTimer()">
+      {{ main.buttonName }}
+      <!-- work -->
+    </span>
+    <span type="button" class="btn btn-info btn-lg" ng-show="main.onBreak" ng-click="main.startResetTimer()">
+      {{ main.buttonName }}
+      <!-- break -->
+    </span>
   </div>
-  <span type="button" class="btn btn-info btn-lg" ng-show="!main.onBreak" ng-click="main.startResetTimer()">
-    {{ main.buttonName }}
-    <!-- work -->
-  </span>
-  <span type="button" class="btn btn-info btn-lg" ng-show="main.onBreak" ng-click="main.startResetTimer()">
-    {{ main.buttonName }}
-    <!-- break -->
-  </span>
 </div>

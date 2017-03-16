@@ -81,5 +81,5 @@
 
   angular
     .module('blocTime')
-    .controller('mainCtrl', ['$interval','$scope', mainCtrl]);
+    .controller('mainCtrl', ['$interval','$scope', 'Tasks', mainCtrl]);
 })();
