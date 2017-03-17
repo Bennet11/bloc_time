@@ -26,8 +26,19 @@
     this.time = WORK_TIME;
     this.buttonName = "Start";
     this.taskList = Tasks.all;
-    this.newTask = createTask;
-    this.removeTask = remove;
+    this.currentTask;
+
+    this.newTask = function(name) {
+      this.taskName = "";
+      this.startResetTimer();
+      this.currentTask = {
+        taskName: name,
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+        completed: false
+      };
+      Tasks.createTask(this.currentTask);
+    };
+    this.removeTask = Tasks.remove;
 
     this.startResetTimer = function() {
       if(self.buttonName === "Start") {
@@ -71,7 +82,7 @@
       self.buttonName = "Start";
 
       if(self.onBreak) {
-        if (completedSessions % 2 === 0) {
+        if (completedSessions % 4 === 0) {
           self.time = LONG_BREAK_TIME;
         } else {
           self.time = BREAK_TIME;

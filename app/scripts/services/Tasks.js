@@ -4,12 +4,13 @@
     var tasks = $firebaseArray(ref);
 
     var addTask = function(task) {
-      tasks.$add({
-        name: task,
-        date: firebase.database.ServerValue.TIMESTAMP
-      });
+      tasks.$add(task);
     }
 
+    var saveTask = function(task) {
+      tasks.$save(task);
+    }
+    
     var deleteTask = function(task) {
       tasks.$remove(task);
     };

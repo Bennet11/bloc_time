@@ -18,17 +18,15 @@
       <h3 id="title">Add a Task</h3>
       <div class="tasks">
         <form ng-submit="main.addTask(newTask)">
-          <input type="text" class="form-control" placeholder="Write a task">
+          <input type="text" class="form-control" ng-model="main.taskName" placeholder="Write a task">
           <br />
-          <button type="button" class="btn btn-success" ng-click="main.createTask()">Submit</button>
+          <button type="button" class="btn btn-success" ng-click="main.newTask(main.taskName)">Submit</button>
         </form>
         <br />
         <br />
         <h3 id="taskList">Task List</h3>
-          <ul>
-            <div id="tasks" ng-repeat="task in main.taskList">
-              </li>{{ task.name }}</li>
-            </div>
+          <ul id="tasks">
+            <li ng-repeat="task in main.taskList">{{ task.name }}</li>
           </ul>
       </div>
     </div>
