@@ -1,5 +1,5 @@
 (function(){
-  function mainCtrl($interval, $scope) {
+  function mainCtrl($interval, $scope, Tasks) {
 
     const WORK_TIME = 5;
     const BREAK_TIME = 2;
@@ -25,6 +25,9 @@
     this.onBreak = false;
     this.time = WORK_TIME;
     this.buttonName = "Start";
+    this.taskList = Tasks.all;
+    this.newTask = createTask;
+    this.removeTask = remove;
 
     this.startResetTimer = function() {
       if(self.buttonName === "Start") {

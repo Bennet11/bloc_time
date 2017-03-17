@@ -14,11 +14,30 @@
 }
 
 .jumbotron {
-  position: relative;
+  position: relative;;
   background-color: grey;
   border: solid;
   border-color: black;
   padding: inherit;
   height: 800px;
   width: 200px;
+  clear: right
+}
+
+.sidebar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0.5rem;
+  width: 20%;
+  height: 100%;
+  background-color: rgb(192,192,192)
+}
+
+.sidebar .sidebar-header #title {
+  text-align: center;
+}
+
+.tasks #taskList {
+  text-align: center;
 }

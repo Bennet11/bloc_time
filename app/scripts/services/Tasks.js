@@ -3,18 +3,20 @@
     var ref = firebase.database().ref();
     var tasks = $firebaseArray(ref);
 
-    var addTask = function(newTask) {
+    var addTask = function(task) {
       tasks.$add({
-        name: newTask,
-        date: Firebase.ServerValue.TIMESTAMP
+        name: task,
+        date: firebase.database.ServerValue.TIMESTAMP
       });
     }
 
+    var deleteTask = function(task) {
+      tasks.$remove(task);
+    };
+
     return {
       createTask : addTask,
-      deleteTask : function(task) {
-        tasks.$remove(task);
-      },
+      remove : deleteTask,
       all: tasks
     };
   }
