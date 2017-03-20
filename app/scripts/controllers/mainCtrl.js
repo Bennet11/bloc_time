@@ -26,19 +26,38 @@
     this.time = WORK_TIME;
     this.buttonName = "Start";
     this.taskList = Tasks.all;
-    this.currentTask;
+    this.activeTask = null;
+
+
 
     this.newTask = function(name) {
       this.taskName = "";
-      this.startResetTimer();
-      this.currentTask = {
+      this.activeTask = {
         taskName: name,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         completed: false
       };
-      Tasks.createTask(this.currentTask);
+      this.setWorkSession();
+      Tasks.createTask(this.activeTask);
     };
+
     this.removeTask = Tasks.remove;
+
+    this.setCurrentTask = function(task) {
+      this.activeTask = task;
+      this.taskName = task.name
+    }
+
+    this.setWorkSession = function() {
+      this.setCurrentTask();
+      this.startResetTimer();
+    };
+
+    this.taskComplete = function() {
+      if(completedSessions % 5 === 0) {
+        this.setCurrentTask.completed = true;
+      }
+    };
 
     this.startResetTimer = function() {
       if(self.buttonName === "Start") {
@@ -49,13 +68,6 @@
       }
     };
 
-    // $scope.$watch('self.time', function(){
-    //   console.log(self.time);
-    //   if(self.time === 0) {
-    //     mySound1.play();
-    //   }
-    // });
-
     var countdown = function(){
       self.time -= 1;
       self.buttonName = "Reset";
@@ -63,7 +75,7 @@
       if(self.time <= 0) {
         if(!self.onBreak) {
           mySound1.play();
-          completedSessions++;
+          completedSessions += 1;
         }
         else if(self.onBreak) {
           mySound2.play();
