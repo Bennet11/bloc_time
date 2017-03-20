@@ -45,12 +45,13 @@
 
     this.setCurrentTask = function(task) {
       this.activeTask = task;
-      this.taskName = task.name
+      this.taskName = task.name;
     }
 
     this.setWorkSession = function() {
-      this.setCurrentTask();
+      this.setCurrentTask(this.activeTask);
       this.startResetTimer();
+      this.taskComplete();
     };
 
     this.taskComplete = function() {
