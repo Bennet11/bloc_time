@@ -29,7 +29,6 @@
     this.activeTask = null;
 
 
-
     this.newTask = function(name) {
       this.taskName = "";
       this.activeTask = {
@@ -43,20 +42,19 @@
 
     this.removeTask = Tasks.remove;
 
-    this.setCurrentTask = function(task) {
+    this.setActiveTask = function(task) {
       this.activeTask = task;
-      this.taskName = task.name;
+      this.activeTask.name = taskName;
     }
 
-    this.setWorkSession = function() {
-      this.setCurrentTask(this.activeTask);
+    this.setWorkSession = function(task) {
       this.startResetTimer();
       this.taskComplete();
     };
 
     this.taskComplete = function() {
       if(completedSessions % 5 === 0) {
-        this.setCurrentTask.completed = true;
+        this.activeTask.completed = true;
       }
     };
 
