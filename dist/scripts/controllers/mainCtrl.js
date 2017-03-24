@@ -1,6 +1,7 @@
 (function(){
   function mainCtrl($interval, $scope, Tasks) {
 
+    const BLANK_TIME = 0
     const WORK_TIME = 5;
     const BREAK_TIME = 2;
     const LONG_BREAK_TIME = 4;
@@ -49,12 +50,16 @@
 
     this.setWorkSession = function(task) {
       this.startResetTimer();
-      this.taskComplete();
+      if(completedSessions > 0 && completedSessions % 3 === 0) {
+        this.taskComplete();
+      }
     };
 
     this.taskComplete = function() {
-      if(completedSessions % 5 === 0) {
+      if(this.activeTask) {
         this.activeTask.completed = true;
+        Tasks.saveTask(this.activeTask);
+        this.activeTask = undefined;
       }
     };
 
@@ -68,6 +73,7 @@
     };
 
     var countdown = function(){
+      console.log("inside countdown");
       self.time -= 1;
       self.buttonName = "Reset";
 
@@ -79,26 +85,30 @@
         else if(self.onBreak) {
           mySound2.play();
         }
-        else{
-          mySound3.play();
-        }
         self.onBreak = !self.onBreak;
         setTimer();
       }
     };
 
     var setTimer = function(){
+      console.log("in setTimer");
       $interval.cancel(timer);
 
       self.buttonName = "Start";
 
       if(self.onBreak) {
-        if (completedSessions % 4 === 0) {
+        if(completedSessions > 0 && completedSessions % 2 === 0) {
           self.time = LONG_BREAK_TIME;
-        } else {
+        }
+        else {
           self.time = BREAK_TIME;
         };
-      } else {
+      }
+      else if(!self.onBreak && (completedSessions > 0 && completedSessions % 3 === 0)) {
+        self.taskComplete();
+        self.time = BLANK_TIME;
+      }
+      else {
         self.time = WORK_TIME;
       }
     };

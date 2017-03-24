@@ -10,13 +10,14 @@
     var saveTask = function(task) {
       tasks.$save(task);
     }
-    
+
     var deleteTask = function(task) {
       tasks.$remove(task);
     };
 
     return {
       createTask : addTask,
+      saveTask: saveTask, 
       remove : deleteTask,
       all: tasks
     };

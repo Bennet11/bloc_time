@@ -1,33 +1,39 @@
 <div class="col-lg-12 jumbotron">
-  <h3>{{ main.activeTask.taskName }}</h3>
   <div class="col-md-12 text-center">
+    <h3>{{ main.activeTask.taskName }}</h3>
     <div class="time">
       {{ main.time | timecode }}
     </div>
-    <span type="button" class="btn btn-info btn-lg" ng-show="!main.onBreak" ng-click="main.setWorkSession()">
+    <button type="button" class="btn btn-info btn-lg" ng-show="!main.onBreak" ng-click="main.setWorkSession()" ng-disabled="!main.activeTask">
       {{ main.buttonName }}
       <!-- work -->
-    </span>
-    <span type="button" class="btn btn-info btn-lg" ng-show="main.onBreak" ng-click="main.setWorkSession()">
+    </button>
+    <button type="button" class="btn btn-info btn-lg" ng-show="main.onBreak" ng-click="main.setWorkSession()" ng-disabled="!main.activeTask">
       {{ main.buttonName }}
       <!-- break -->
+    </button>
   </div>
 
   <section class="sidebar">
     <div class="sidebar-header">
       <h3 id="title">Add a Task</h3>
       <div class="tasks">
-        <form ng-submit="main.addTask(newTask)">
-          <input type="text" class="form-control" ng-model="main.taskName" placeholder="Write a task">
+        <form>
+          <input type="text" class="form-control" ng-model="main.taskName" placeholder="Write a task" ng-disabled="main.activeTask">
           <br />
-          <button type="button" class="btn btn-success" ng-click="main.newTask(main.taskName)">Submit</button>
-          <button type="button" class="btn btn-primary disabled" ng-show="">Submit</button>
+          <button
+            type="button"
+            class="btn btn-success"
+            ng-click="main.newTask(main.taskName)"
+            ng-class="{disabled: main.activeTask}"
+            ng-disabled="main.activeTask">Submit</button>
         </form>
         <br />
         <br />
+        currentTask: {{ main.activeTask }}
         <h3 id="taskList">Task List</h3>
-          <div id="tasks" ng-repeat="task in main.taskList">
-            <h4 ng-click="main.setCurrentTask(task)">{{ task.taskName }}</h4>
+          <div id="tasks" ng-repeat="task in main.taskList | orderBy: '-createdAt'">
+            <h4> {{ task.taskName }} </h4>
           </div>
       </div>
     </div>
